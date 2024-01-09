@@ -1,0 +1,11 @@
+{
+    "name": "project-root",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+      "start": "concurrently \"npm run server\" \"npm run frontend\"",
+      "server": "cd server && npm start",
+      "frontend": "cd frontend && npm run dev"
+    }
+  }
+  
