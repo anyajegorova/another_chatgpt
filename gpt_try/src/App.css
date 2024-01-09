@@ -1,6 +1,7 @@
 .app {
   background-color: #242424;
   display: flex;
+  box-sizing: border-box;
 }
 
 .sidebar {
@@ -37,8 +38,8 @@ button {
   cursor: pointer
 }
 
-button:hover, 
-button:focus{
+button:hover,
+button:focus {
   background-color: rgba(255, 255, 255, 0.18);
 }
 
@@ -94,7 +95,7 @@ input:focus {
 }
 
 
-#submit{
+#submit {
   position: absolute;
   right: -10px;
   bottom: 10.5px;
@@ -104,6 +105,36 @@ input:focus {
 }
 
 #submit:hover,
-#submit:focus{
+#submit:focus {
   color: #F50057;
+}
+
+
+.feed {
+  overflow-y: scroll;
+  width: 100%;
+  padding-left: 50px;
+  padding-left: 0;
+
+  margin-left: 20px;
+
+}
+
+.feed li {
+  list-style-type: none;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  background-color: #444654;
+  max-width: 100%;
+  margin: 20px 0;
+}
+
+.feed p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.2em;
+}
+
+.feed p.role {
+  min-width: 100px;
 }
