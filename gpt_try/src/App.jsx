@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 
 import './App.css'
+import User from './assets/Usersvg';
+import Robot from './assets/Assistantsvg'
 
 function App() {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('');
   const [message, setMessage] = useState(null);
   const [chats, setChats] = useState([]);
   const [chatTitle, setChatTitle] = useState(null);
@@ -14,12 +16,13 @@ function App() {
       setChatTitle(null),
       setValue('')
   }
-
+  /*Opening existing chats*/
   const handleClick = (uniqueTitle) => {
     setChatTitle(uniqueTitle),
       setMessage(null),
       setValue('')
   }
+
   const getMessages = async () => {
     const options = {
       method: 'POST',
@@ -33,19 +36,20 @@ function App() {
     try {
       const response = await fetch('http://localhost:8000/completions', options)
       const data = await response.json();
+      console.log(data)
       setMessage(data.choices[0].message);
 
     } catch (error) {
       console.error(error)
     }
 
-    
   }
 
   useEffect(() => {
     if (!chatTitle && value && message) {
       setChatTitle(value)
-    } if (chatTitle && value && message) {
+    }
+    if (chatTitle && value && message) {
       setChats(chats => (
         [...chats,
         {
@@ -60,6 +64,7 @@ function App() {
         }]
       ))
     }
+
   }, [message, chatTitle])
 
   const currentChat = chats.filter(chat => chat.title === chatTitle);
@@ -82,8 +87,8 @@ function App() {
         <ul className='feed'>
           {currentChat?.map((chatMessage, index) => <li key={index} className={chatMessage.role}>
 
-            <p className='role'> {chatMessage.role} </p>
-            <p> {chatMessage.content} </p>
+            <p className='role'> {chatMessage.role === 'user' ? (<User />) : (<Robot />)}</p>
+            <p id='content'> {chatMessage.content} </p>
 
           </li>)}
         </ul>
